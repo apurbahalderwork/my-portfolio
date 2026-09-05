@@ -10,23 +10,43 @@ import {
   FaInstagram,
   FaFacebookF,
   FaPaperPlane,
-  FaEnvelopeOpenText
+  FaEnvelopeOpenText,
+  FaCopy,
+  FaCheck
 } from 'react-icons/fa6';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(CONTACT.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
 
     setIsSubmitting(true);
+    setStatus(null);
 
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '142bd010-04cc-4ab5-82a2-e9ef9f85c288';
+    const senderName = formData.name.trim();
+    const senderEmail = formData.email.trim();
+    const senderMsg = formData.message.trim();
 
-    if (accessKey) {
+    // Check if a custom valid Web3Forms key was supplied (not the dummy one)
+    const customWeb3Key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    const isCustomWeb3 = customWeb3Key && customWeb3Key !== '142bd010-04cc-4ab5-82a2-e9ef9f85c288';
+
+    let delivered = false;
+
+    if (isCustomWeb3) {
       try {
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
@@ -35,55 +55,93 @@ const Contact = () => {
             Accept: 'application/json',
           },
           body: JSON.stringify({
-            access_key: accessKey,
-            name: formData.name,
-            email: formData.email,
-            replyto: formData.email,
-            message: formData.message,
-            subject: `Portfolio Inquiry from ${formData.name}`,
-            from_name: formData.name
+            access_key: customWeb3Key,
+            name: senderName,
+            email: senderEmail,
+            replyto: senderEmail,
+            message: senderMsg,
+            subject: `Portfolio Inquiry from ${senderName}`,
+            from_name: senderName
           }),
         });
         const data = await res.json();
         if (data.success) {
+          delivered = true;
           setStatus({
             type: 'success',
-            msg: 'Message sent successfully! Apurba will get back to you shortly.'
+            msg: 'Message sent successfully! Apurba will receive it in his inbox and reply shortly.'
           });
           setFormData({ name: '', email: '', message: '' });
-        } else {
-          throw new Error(data.message || 'Error submitting form');
         }
-      } catch {
-        // Fallback directly to mailto
-        const mailtoUrl = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
-          `Portfolio Message from ${formData.name}`
-        )}&body=${encodeURIComponent(
-          `Hi Apurba,\n\n${formData.message}\n\nFrom: ${formData.name}\nEmail: ${formData.email}`
-        )}`;
-        window.location.href = mailtoUrl;
+      } catch (err) {
+        console.warn('Web3Forms failed, falling back to FormSubmit:', err);
+      }
+    }
+
+    // Default direct inbox delivery via FormSubmit.co
+    if (!delivered) {
+      try {
+        const response = await fetch(`https://formsubmit.co/ajax/${CONTACT.email}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            name: senderName,
+            email: senderEmail,
+            _replyto: senderEmail,
+            message: senderMsg,
+            _subject: `New Portfolio Message from ${senderName} (${senderEmail})`,
+            _template: 'table',
+            _captcha: 'false',
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.success === 'true' || data.success === true) {
+          setStatus({
+            type: 'success',
+            msg: 'Message sent successfully! Apurba will receive it in his inbox and get back to you shortly.'
+          });
+          setFormData({ name: '', email: '', message: '' });
+          delivered = true;
+        } else if (data.message && data.message.includes('Activation')) {
+          setStatus({
+            type: 'info',
+            msg: "Form submitted! An 'Activate Form' confirmation email was sent to Apurba's Gmail (apurbahaldernewwork@gmail.com). Apurba: please click 'Activate Form' once in your inbox to enable instant delivery for all submissions!"
+          });
+          delivered = true;
+        } else {
+          throw new Error(data.message || 'Form submission encountered an issue.');
+        }
+      } catch (err) {
+        console.error('Contact submission error:', err);
         setStatus({
-          type: 'info',
-          msg: 'Opening your default email app to send your message directly to Apurba.'
+          type: 'error',
+          msg: `Could not send automatically. Please click "Direct Email" below or write to ${CONTACT.email}`
         });
       }
-    } else {
-      // Direct reliable mailto dispatch
-      const mailtoUrl = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
-        `Portfolio Message from ${formData.name}`
-      )}&body=${encodeURIComponent(
-        `Hi Apurba,\n\n${formData.message}\n\nFrom: ${formData.name}\nEmail: ${formData.email}`
-      )}`;
-      window.location.href = mailtoUrl;
-      setStatus({
-        type: 'success',
-        msg: 'Opening your email client to send this message directly to Apurba!'
-      });
-      setFormData({ name: '', email: '', message: '' });
     }
 
     setIsSubmitting(false);
-    setTimeout(() => setStatus(null), 8000);
+    setTimeout(() => setStatus(null), 9000);
+  };
+
+  const handleDirectEmailClick = (e) => {
+    // On desktop, open Gmail Web Compose directly in a new tab for reliability
+    if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      e.preventDefault();
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+        CONTACT.email
+      )}&su=${encodeURIComponent(
+        formData.name ? `Portfolio Inquiry from ${formData.name}` : 'Portfolio Inquiry'
+      )}&body=${encodeURIComponent(
+        formData.message ? `${formData.message}\n\nFrom: ${formData.name}\nEmail: ${formData.email}` : ''
+      )}`;
+      window.open(gmailUrl, '_blank');
+    }
   };
 
   return (
@@ -141,13 +199,14 @@ const Contact = () => {
                   disabled={isSubmitting}
                 >
                   <FaPaperPlane />
-                  <span>{isSubmitting ? 'DISPATCHING...' : 'SEND MESSAGE'}</span>
+                  <span>{isSubmitting ? 'SENDING TO INBOX...' : 'SEND MESSAGE'}</span>
                 </button>
 
                 <a
                   href={`mailto:${CONTACT.email}?subject=Portfolio%20Inquiry`}
+                  onClick={handleDirectEmailClick}
                   className="direct-email-link"
-                  title="Direct email without form"
+                  title="Direct email via Gmail or Mail App"
                 >
                   <FaEnvelopeOpenText />
                   <span>Direct Email</span>
@@ -155,8 +214,23 @@ const Contact = () => {
               </div>
 
               {status && (
-                <div className="contact-success-msg" style={{ color: status.type === 'info' ? '#38bdf8' : '#10b981' }}>
-                  <FaCircleCheck /> <span>{status.msg}</span>
+                <div
+                  className="contact-success-msg"
+                  style={{
+                    color: status.type === 'error' ? '#f87171' : status.type === 'info' ? '#38bdf8' : '#10b981',
+                    background: status.type === 'error' ? 'rgba(239, 68, 68, 0.12)' : status.type === 'info' ? 'rgba(56, 189, 248, 0.12)' : 'rgba(16, 185, 129, 0.12)',
+                    border: `1px solid ${status.type === 'error' ? 'rgba(239, 68, 68, 0.3)' : status.type === 'info' ? 'rgba(56, 189, 248, 0.3)' : 'rgba(16, 185, 129, 0.3)'}`,
+                    padding: '10px 14px',
+                    borderRadius: '6px',
+                    marginTop: '0.75rem',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '10px',
+                    fontSize: '0.88rem',
+                    lineHeight: 1.45
+                  }}
+                >
+                  <FaCircleCheck style={{ marginTop: '2px', flexShrink: 0 }} /> <span>{status.msg}</span>
                 </div>
               )}
             </form>
@@ -191,9 +265,35 @@ const Contact = () => {
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '1.05rem', color: 'rgba(255, 255, 255, 0.9)' }}>
                 <span style={{ color: 'var(--primary-orange)', fontSize: '1.1rem' }}><FaEnvelope /></span>
-                <a href={`mailto:${CONTACT.email}`} style={{ color: 'var(--white)', fontWeight: 600 }}>
+                <a
+                  href={`mailto:${CONTACT.email}?subject=Portfolio%20Inquiry`}
+                  onClick={handleDirectEmailClick}
+                  style={{ color: 'var(--white)', fontWeight: 600 }}
+                  title="Click to email Apurba"
+                >
                   {CONTACT.email}
                 </a>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: '1px solid rgba(255, 255, 255, 0.16)',
+                    borderRadius: '4px',
+                    color: copied ? '#10b981' : 'rgba(255, 255, 255, 0.8)',
+                    padding: '3px 8px',
+                    fontSize: '0.75rem',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    marginLeft: '4px'
+                  }}
+                  title="Copy email address"
+                >
+                  {copied ? <FaCheck /> : <FaCopy />}
+                  <span>{copied ? 'Copied!' : 'Copy'}</span>
+                </button>
               </div>
             </div>
 
