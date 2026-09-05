@@ -40,11 +40,10 @@ const About = () => {
               <div className="stat-number">4+</div>
               <div className="stat-info">
                 <div className="stat-title">
-                  <span className="stat-dot"></span> PRODUCTION &amp; CORE PROJECTS
+                  <span className="stat-dot"></span> PRODUCTION &amp; CORE SYSTEMS
                 </div>
                 <p className="stat-desc">
-                  Engineered Wave (live on Render), YourCabs (geospatial matching), Mentor-Mentee application,
-                  and GitHub Profile Analyzer.
+                  Engineered Wave solo to Render, architected YourCabs geospatial matching, and built developer tools without leaving "TODO: fix later" in production.
                 </p>
               </div>
             </div>
@@ -53,11 +52,10 @@ const About = () => {
               <div className="stat-number">5-P</div>
               <div className="stat-info">
                 <div className="stat-title">
-                  <span className="stat-dot"></span> SQUAD LED AS TECHNICAL ARCHITECT
+                  <span className="stat-dot"></span> SQUAD ARCHITECT &amp; TECH LEAD
                 </div>
                 <p className="stat-desc">
-                  Defined Git branching strategies, sprint roadmaps, and MongoDB geospatial query pipelines
-                  supervised by faculty Dr. Soumitra Roy.
+                  Led a 5-developer squad on YourCabs. Kept Git branching clean, ran sprint planning, and delivered geospatial algorithms on deadline with zero broken builds.
                 </p>
               </div>
             </div>
@@ -69,8 +67,7 @@ const About = () => {
                   <span className="stat-dot"></span> PEERS AS CLASS REPRESENTATIVE
                 </div>
                 <p className="stat-desc">
-                  Elected Class Representative at Adamas University (2023–Present) coordinating academic scheduling
-                  and cohort initiatives.
+                  Elected Class Representative at Adamas University (2023–Present). Coordinating exams and faculty communications—proving consensus algorithms work on humans too.
                 </p>
               </div>
             </div>

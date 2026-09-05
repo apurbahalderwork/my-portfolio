@@ -103,7 +103,7 @@ const Contact = () => {
                 <input
                   id="contact-name"
                   type="text"
-                  placeholder="Your Name"
+                  placeholder="Your Name (or GitHub Handle)"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -127,7 +127,7 @@ const Contact = () => {
                 <textarea
                   id="contact-message"
                   rows="3"
-                  placeholder="Your message or opportunity details..."
+                  placeholder="Tell me about your project, role, or your favorite debugging war story..."
                   required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -141,7 +141,7 @@ const Contact = () => {
                   disabled={isSubmitting}
                 >
                   <FaPaperPlane />
-                  <span>{isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}</span>
+                  <span>{isSubmitting ? 'DISPATCHING...' : 'SEND MESSAGE'}</span>
                 </button>
 
                 <a
@@ -150,7 +150,7 @@ const Contact = () => {
                   title="Direct email without form"
                 >
                   <FaEnvelopeOpenText />
-                  <span>Email Directly</span>
+                  <span>Direct Email</span>
                 </a>
               </div>
 
@@ -172,6 +172,9 @@ const Contact = () => {
               LET'S BUILD <br />
               TOGETHER
             </h2>
+            <p style={{ color: 'rgba(255, 255, 255, 0.78)', fontSize: '0.98rem', lineHeight: 1.6, marginTop: '0.75rem' }}>
+              Have an opening, an ambitious product idea, or want to debate tabs vs spaces? My inbox is open and replies are 100% human (no auto-responders asking to book a 15-minute sync).
+            </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '1.05rem', color: 'rgba(255, 255, 255, 0.9)' }}>

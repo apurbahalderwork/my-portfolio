@@ -26,7 +26,7 @@ const SKILL_DOMAINS = [
     id: '001',
     title: 'FRONTEND ENGINEERING',
     description:
-      'Crafting reactive, mobile-responsive interfaces using React 19, modern ES6+ JavaScript, Tailwind CSS, and Redux Toolkit for state management.',
+      'Building reactive interfaces with React 19, modern ES6+, and CSS. Crafting component trees that do not re-render 400 times on a single keystroke, and keeping state predictable via Redux Toolkit.',
     skills: [
       { name: 'React 19', icon: <FaReact /> },
       { name: 'JavaScript (ES6+)', icon: <FaJs /> },
@@ -40,9 +40,9 @@ const SKILL_DOMAINS = [
   },
   {
     id: '002',
-    title: 'BACKEND & DISTRIBUTED SYSTEMS',
+    title: 'BACKEND & REAL-TIME SYSTEMS',
     description:
-      'Architecting asynchronous Node.js and Express.js REST APIs, Socket.IO event streams for low-latency messaging, and MongoDB Atlas databases.',
+      'Architecting asynchronous Node.js/Express REST APIs and Socket.IO event streams. Returning proper HTTP status codes (no 200 OK containing error payloads) and indexing MongoDB with geospatial 2dsphere queries.',
     skills: [
       { name: 'Node.js Runtime', icon: <FaNodeJs /> },
       { name: 'Express.js REST APIs', icon: <SiExpress /> },
@@ -55,9 +55,9 @@ const SKILL_DOMAINS = [
   },
   {
     id: '003',
-    title: 'LANGUAGES & DEVOPS TOOLING',
+    title: 'LANGUAGES, DSA & DEVOPS',
     description:
-      'Writing structured code in C/C++ and Python, managing Agile Git branching workflows, API testing with Postman, and deploying to Render.',
+      'Writing structured algorithms in C/C++ and Python. Managing clean Git feature branches with meaningful commit logs (no "fix bug 4" commits), testing endpoints in Postman, and deploying live to Render.',
     skills: [
       { name: 'C / C++ (DSA)', icon: <SiCplusplus /> },
       { name: 'Python Algorithms', icon: <SiPython /> },

@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="footer-top-row" style={{ gridTemplateColumns: '1fr', paddingBottom: '2.5rem' }}>
         <div className="footer-bio-col">
           <p className="footer-bio-text">
-            Full-stack MERN developer building real-time applications, geospatial architectures, and intuitive web systems.
+            Full-Stack MERN engineer passionate about real-time systems, clean architectures, and software that doesn't collapse on Fridays. Based in Kolkata · Available for full-time engineering roles &amp; high-impact contracts.
           </p>
           <div className="footer-contact-links">
             <a href={`tel:${CONTACT.phoneNo}`} className="footer-phone">
@@ -84,8 +84,8 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom-bar">
-        <span>Copyright &amp; Code by Apurba Halder - 2026</span>
-        <span>Built with React 19 &amp; Modern CSS</span>
+        <span>© 2026 Apurba Halder · Engineered with React 19 &amp; Modern CSS</span>
+        <span>Zero tracking cookies · Tested before pushing to main</span>
       </div>
     </footer>
   );
