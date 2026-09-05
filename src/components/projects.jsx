@@ -75,6 +75,61 @@ const Projects = () => {
                   </span>
                 ))}
               </div>
+
+              {/* Accessible direct action links for mobile & desktop */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '1rem', paddingTop: '0.85rem', borderTop: '1px solid rgba(0, 0, 0, 0.06)' }}>
+                {project.live && (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      fontSize: '0.8rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontWeight: 700,
+                      color: '#ffffff',
+                      backgroundColor: 'var(--primary-orange)',
+                      padding: '5px 12px',
+                      borderRadius: '5px',
+                      textDecoration: 'none',
+                      transition: 'opacity 0.2s'
+                    }}
+                    aria-label={`Launch ${project.title} Live Application`}
+                  >
+                    <FaArrowUpRightFromSquare style={{ fontSize: '0.72rem' }} />
+                    <span>Live Demo</span>
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      fontSize: '0.8rem',
+                      fontFamily: 'var(--font-mono)',
+                      fontWeight: 700,
+                      color: 'var(--text-dark)',
+                      backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                      border: '1px solid rgba(0, 0, 0, 0.08)',
+                      padding: '5px 12px',
+                      borderRadius: '5px',
+                      textDecoration: 'none',
+                      transition: 'all 0.2s'
+                    }}
+                    aria-label={`View ${project.title} Source Code on GitHub`}
+                  >
+                    <FaGithub style={{ fontSize: '0.85rem' }} />
+                    <span>Source Code</span>
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         ))}

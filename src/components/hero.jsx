@@ -27,6 +27,50 @@ const Hero = () => {
             {HERO_CONTENT}
           </p>
 
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '12px', marginTop: '1.5rem', marginBottom: '2rem' }}>
+            <a
+              href="#projects"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '11px 22px',
+                borderRadius: '8px',
+                backgroundColor: 'var(--primary-orange)',
+                color: '#ffffff',
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 700,
+                fontSize: '0.92rem',
+                textDecoration: 'none',
+                boxShadow: '0 4px 14px rgba(235, 89, 51, 0.35)',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+              }}
+            >
+              <span>Explore Projects</span>
+              <FaArrowRight />
+            </a>
+            <a
+              href="#contact"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 20px',
+                borderRadius: '8px',
+                border: '1px solid rgba(0, 0, 0, 0.12)',
+                backgroundColor: 'rgba(0, 0, 0, 0.03)',
+                color: 'var(--text-dark)',
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 600,
+                fontSize: '0.92rem',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <span>Get in Touch</span>
+            </a>
+          </div>
+
           <div className="framer-hero-brand-group">
             <span className="framer-hero-year">©2026</span>
             <h1 className="framer-hero-name">
@@ -67,19 +111,26 @@ const Hero = () => {
           </a>
 
           {/* Floating "Let's Talk" Card */}
-          <div className="framer-floating-card framer-talk-card">
+          <a
+            href="#contact"
+            className="framer-floating-card framer-talk-card"
+            style={{ textDecoration: 'none', cursor: 'pointer' }}
+          >
             <div className="talk-avatar-col">
               <img src={mypic} alt="Apurba Avatar" className="talk-avatar" />
             </div>
             <div className="talk-info-col">
-              <span className="talk-badge">Let's Connect</span>
+              <span className="talk-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block' }}></span>
+                Open to Roles
+              </span>
               <h3 className="talk-name">Apurba Halder</h3>
-              <p className="talk-role">Full Stack / MERN Developer</p>
+              <p className="talk-role">Full Stack &amp; MERN Engineer</p>
             </div>
-            <a href="#contact" className="talk-arrow-btn" aria-label="Contact Apurba">
+            <div className="talk-arrow-btn" aria-label="Contact Apurba">
               <FaArrowRight />
-            </a>
-          </div>
+            </div>
+          </a>
         </div>
       </div>
     </section>
