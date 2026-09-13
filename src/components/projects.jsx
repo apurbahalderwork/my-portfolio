@@ -6,9 +6,7 @@ const Projects = () => {
   return (
     <section className="framer-projects-section" id="projects">
       <div className="projects-header-row">
-        <div className="framer-pill-badge">
-          <span>PRODUCTION &amp; CORE REPOSITORIES</span>
-        </div>
+        {/* Eyebrow badge removed — heading carries its own weight (Hallmark finding 9) */}
         <h2 className="projects-main-title">
           FEATURED PROJECTS.
         </h2>
@@ -34,7 +32,7 @@ const Projects = () => {
                       className="project-action-btn live-btn"
                       aria-label="Live Demo"
                     >
-                      <FaArrowUpRightFromSquare />
+                      <FaArrowUpRightFromSquare aria-hidden="true" />
                       <span>Live App</span>
                     </a>
                   )}
@@ -46,7 +44,7 @@ const Projects = () => {
                       className="project-action-btn git-btn"
                       aria-label="GitHub Repository"
                     >
-                      <FaGithub />
+                      <FaGithub aria-hidden="true" />
                       <span>Source Code</span>
                     </a>
                   )}
@@ -63,12 +61,10 @@ const Projects = () => {
               <span className="footer-category">{project.badge}</span>
             </div>
 
-            {/* Description & Tech Tags */}
-            <div style={{ marginTop: '0.75rem' }}>
-              <p style={{ fontSize: '0.92rem', color: 'var(--text-muted-dark)', lineHeight: 1.5, marginBottom: '0.75rem' }}>
-                {project.description}
-              </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            {/* Description & Tech Tags — no inline styles */}
+            <div className="project-card-body">
+              <p className="project-desc-text">{project.description}</p>
+              <div className="project-tech-tags">
                 {project.technologies.slice(0, 4).map((tech, tIdx) => (
                   <span key={tIdx} className="service-tag-pill" style={{ fontSize: '0.7rem' }}>
                     {tech}
@@ -76,30 +72,17 @@ const Projects = () => {
                 ))}
               </div>
 
-              {/* Accessible direct action links for mobile & desktop */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '1rem', paddingTop: '0.85rem', borderTop: '1px solid rgba(0, 0, 0, 0.06)' }}>
+              {/* Accessible direct action links */}
+              <div className="project-inline-actions">
                 {project.live && (
                   <a
                     href={project.live}
                     target="_blank"
                     rel="noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      fontSize: '0.8rem',
-                      fontFamily: 'var(--font-mono)',
-                      fontWeight: 700,
-                      color: '#ffffff',
-                      backgroundColor: 'var(--primary-orange)',
-                      padding: '5px 12px',
-                      borderRadius: '5px',
-                      textDecoration: 'none',
-                      transition: 'opacity 0.2s'
-                    }}
+                    className="project-link-btn btn-live"
                     aria-label={`Launch ${project.title} Live Application`}
                   >
-                    <FaArrowUpRightFromSquare style={{ fontSize: '0.72rem' }} />
+                    <FaArrowUpRightFromSquare aria-hidden="true" />
                     <span>Live Demo</span>
                   </a>
                 )}
@@ -108,24 +91,10 @@ const Projects = () => {
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      fontSize: '0.8rem',
-                      fontFamily: 'var(--font-mono)',
-                      fontWeight: 700,
-                      color: 'var(--text-dark)',
-                      backgroundColor: 'rgba(0, 0, 0, 0.05)',
-                      border: '1px solid rgba(0, 0, 0, 0.08)',
-                      padding: '5px 12px',
-                      borderRadius: '5px',
-                      textDecoration: 'none',
-                      transition: 'all 0.2s'
-                    }}
+                    className="project-link-btn btn-source"
                     aria-label={`View ${project.title} Source Code on GitHub`}
                   >
-                    <FaGithub style={{ fontSize: '0.85rem' }} />
+                    <FaGithub aria-hidden="true" />
                     <span>Source Code</span>
                   </a>
                 )}
@@ -145,7 +114,7 @@ const Projects = () => {
         >
           <span className="btn-label">ALL REPOSITORIES ON GITHUB</span>
           <span className="btn-arrow-box">
-            <FaArrowRight />
+            <FaArrowRight aria-hidden="true" />
           </span>
         </a>
       </div>

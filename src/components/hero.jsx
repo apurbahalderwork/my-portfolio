@@ -27,45 +27,17 @@ const Hero = () => {
             {HERO_CONTENT}
           </p>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '12px', marginTop: '1.5rem', marginBottom: '2rem' }}>
+          <div className="hero-cta-row">
             <a
               href="#projects"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '11px 22px',
-                borderRadius: '8px',
-                backgroundColor: 'var(--primary-orange)',
-                color: '#ffffff',
-                fontFamily: 'var(--font-heading)',
-                fontWeight: 700,
-                fontSize: '0.92rem',
-                textDecoration: 'none',
-                boxShadow: '0 4px 14px rgba(235, 89, 51, 0.35)',
-                transition: 'transform 0.2s ease, box-shadow 0.2s ease'
-              }}
+              className="hero-btn-primary"
             >
               <span>Explore Projects</span>
               <FaArrowRight />
             </a>
             <a
               href="#contact"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '10px 20px',
-                borderRadius: '8px',
-                border: '1px solid rgba(0, 0, 0, 0.12)',
-                backgroundColor: 'rgba(0, 0, 0, 0.03)',
-                color: 'var(--text-dark)',
-                fontFamily: 'var(--font-heading)',
-                fontWeight: 600,
-                fontSize: '0.92rem',
-                textDecoration: 'none',
-                transition: 'all 0.2s ease'
-              }}
+              className="hero-btn-secondary"
             >
               <span>Get in Touch</span>
             </a>

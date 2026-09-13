@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="framer-footer">
+      {/* Bio + contact coordinates */}
       <div className="footer-top-row" style={{ gridTemplateColumns: '1fr', paddingBottom: '2.5rem' }}>
         <div className="footer-bio-col">
           <p className="footer-bio-text">
@@ -22,56 +23,39 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Nav row — simplified: social + legal links only, no redundant nav columns (Hallmark finding 7) */}
       <div className="footer-nav-row">
-        {/* Navigation Links Columns */}
         <div className="footer-nav-cols-wrap">
-          <div className="footer-nav-col">
-            <span className="footer-col-title">Navigation</span>
-            <ul className="footer-col-links">
-              <li><a href="#hero">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#skills">Skills</a></li>
-              <li><a href="#experience">Experience</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#education">Education</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-
           <div className="footer-nav-col">
             <span className="footer-col-title">Social / Profiles</span>
             <ul className="footer-col-links">
               <li>
                 <a href={CONTACT.github} target="_blank" rel="noreferrer">
-                  GitHub <FaArrowUpRightFromSquare className="ext-icon" />
+                  GitHub <FaArrowUpRightFromSquare className="ext-icon" aria-hidden="true" />
                 </a>
               </li>
               <li>
                 <a href={CONTACT.linkedin} target="_blank" rel="noreferrer">
-                  LinkedIn <FaArrowUpRightFromSquare className="ext-icon" />
+                  LinkedIn <FaArrowUpRightFromSquare className="ext-icon" aria-hidden="true" />
                 </a>
               </li>
               <li>
                 <a href={CONTACT.instagram} target="_blank" rel="noreferrer">
-                  Instagram <FaArrowUpRightFromSquare className="ext-icon" />
+                  Instagram <FaArrowUpRightFromSquare className="ext-icon" aria-hidden="true" />
                 </a>
               </li>
               <li>
                 <a href={CONTACT.facebook} target="_blank" rel="noreferrer">
-                  Facebook <FaArrowUpRightFromSquare className="ext-icon" />
+                  Facebook <FaArrowUpRightFromSquare className="ext-icon" aria-hidden="true" />
                 </a>
               </li>
-              <li>
-                <Link to="/privacy">Privacy Policy</Link>
-              </li>
-              <li>
-                <Link to="/terms">Terms of Service</Link>
-              </li>
+              <li><Link to="/privacy">Privacy Policy</Link></li>
+              <li><Link to="/terms">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
 
-        {/* Giant Typographic Trademark */}
+        {/* Giant Typographic Trademark — the real footer statement */}
         <div className="footer-giant-brand">
           <div className="giant-brand-first">
             <span>Apurba</span>

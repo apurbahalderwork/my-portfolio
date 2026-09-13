@@ -40,7 +40,6 @@ const Contact = () => {
     const senderEmail = formData.email.trim();
     const senderMsg = formData.message.trim();
 
-    // Check if a custom valid Web3Forms key was supplied (not the dummy one)
     const customWeb3Key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
     const isCustomWeb3 = customWeb3Key && customWeb3Key !== '142bd010-04cc-4ab5-82a2-e9ef9f85c288';
 
@@ -50,10 +49,7 @@ const Contact = () => {
       try {
         const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             access_key: customWeb3Key,
             name: senderName,
@@ -78,15 +74,11 @@ const Contact = () => {
       }
     }
 
-    // Default direct inbox delivery via FormSubmit.co
     if (!delivered) {
       try {
         const response = await fetch(`https://formsubmit.co/ajax/${CONTACT.email}`, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             name: senderName,
             email: senderEmail,
@@ -130,7 +122,6 @@ const Contact = () => {
   };
 
   const handleDirectEmailClick = (e) => {
-    // On desktop, open Gmail Web Compose directly in a new tab for reliability
     if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
       e.preventDefault();
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
@@ -148,6 +139,7 @@ const Contact = () => {
     <section className="framer-contact-section" id="contact">
       <div className="contact-banner-box">
         <div className="contact-banner-grid">
+
           {/* Left: Floating Form Card */}
           <div className="contact-form-card">
             <div className="form-card-header">
@@ -213,24 +205,11 @@ const Contact = () => {
                 </a>
               </div>
 
+              {/* Token-driven status banner — no inline colours */}
               {status && (
-                <div
-                  className="contact-success-msg"
-                  style={{
-                    color: status.type === 'error' ? '#f87171' : status.type === 'info' ? '#38bdf8' : '#10b981',
-                    background: status.type === 'error' ? 'rgba(239, 68, 68, 0.12)' : status.type === 'info' ? 'rgba(56, 189, 248, 0.12)' : 'rgba(16, 185, 129, 0.12)',
-                    border: `1px solid ${status.type === 'error' ? 'rgba(239, 68, 68, 0.3)' : status.type === 'info' ? 'rgba(56, 189, 248, 0.3)' : 'rgba(16, 185, 129, 0.3)'}`,
-                    padding: '10px 14px',
-                    borderRadius: '6px',
-                    marginTop: '0.75rem',
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '10px',
-                    fontSize: '0.88rem',
-                    lineHeight: 1.45
-                  }}
-                >
-                  <FaCircleCheck style={{ marginTop: '2px', flexShrink: 0 }} /> <span>{status.msg}</span>
+                <div className={`contact-status-banner status-${status.type}`}>
+                  <FaCircleCheck aria-hidden="true" />
+                  <span>{status.msg}</span>
                 </div>
               )}
             </form>
@@ -238,37 +217,35 @@ const Contact = () => {
 
           {/* Right: Big Invitation Text, Contact Coordinates & Clickable Social Accounts */}
           <div className="contact-statement-col">
-            <div className="framer-pill-badge badge-white">
-              <span>GET IN TOUCH</span>
-            </div>
-
+            {/* Eyebrow badge removed — heading carries its own weight (Hallmark finding 9) */}
             <h2 className="statement-huge-title">
               LET'S BUILD <br />
               TOGETHER
             </h2>
-            <p style={{ color: 'rgba(255, 255, 255, 0.78)', fontSize: '0.98rem', lineHeight: 1.6, marginTop: '0.75rem' }}>
+            <p className="contact-statement-body">
               Have an opening, an ambitious product idea, or want to debate tabs vs spaces? My inbox is open and replies are 100% human (no auto-responders asking to book a 15-minute sync).
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '1.05rem', color: 'rgba(255, 255, 255, 0.9)' }}>
-                <span style={{ color: 'var(--primary-orange)', fontSize: '1.1rem' }}><FaLocationDot /></span>
+            {/* Contact coordinate rows — no inline styles */}
+            <div className="contact-info-rows-stack">
+              <div className="contact-info-row">
+                <FaLocationDot className="contact-info-row-icon" aria-hidden="true" />
                 <span>{CONTACT.address}</span>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '1.05rem', color: 'rgba(255, 255, 255, 0.9)' }}>
-                <span style={{ color: 'var(--primary-orange)', fontSize: '1.1rem' }}><FaPhone /></span>
-                <a href={`tel:${CONTACT.phoneNo}`} style={{ color: 'var(--white)', fontWeight: 600 }}>
+              <div className="contact-info-row">
+                <FaPhone className="contact-info-row-icon" aria-hidden="true" />
+                <a href={`tel:${CONTACT.phoneNo}`} className="contact-info-link">
                   {CONTACT.phoneNo}
                 </a>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '1.05rem', color: 'rgba(255, 255, 255, 0.9)' }}>
-                <span style={{ color: 'var(--primary-orange)', fontSize: '1.1rem' }}><FaEnvelope /></span>
+              <div className="contact-info-row">
+                <FaEnvelope className="contact-info-row-icon" aria-hidden="true" />
                 <a
                   href={`mailto:${CONTACT.email}?subject=Portfolio%20Inquiry`}
                   onClick={handleDirectEmailClick}
-                  style={{ color: 'var(--white)', fontWeight: 600 }}
+                  className="contact-info-link"
                   title="Click to email Apurba"
                 >
                   {CONTACT.email}
@@ -276,22 +253,11 @@ const Contact = () => {
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    border: '1px solid rgba(255, 255, 255, 0.16)',
-                    borderRadius: '4px',
-                    color: copied ? '#10b981' : 'rgba(255, 255, 255, 0.8)',
-                    padding: '3px 8px',
-                    fontSize: '0.75rem',
-                    cursor: 'pointer',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    marginLeft: '4px'
-                  }}
+                  className={`copy-email-btn${copied ? ' copied' : ''}`}
                   title="Copy email address"
+                  aria-label={copied ? 'Email copied' : 'Copy email address'}
                 >
-                  {copied ? <FaCheck /> : <FaCopy />}
+                  {copied ? <FaCheck aria-hidden="true" /> : <FaCopy aria-hidden="true" />}
                   <span>{copied ? 'Copied!' : 'Copy'}</span>
                 </button>
               </div>
@@ -301,52 +267,26 @@ const Contact = () => {
             <div className="contact-socials-wrapper">
               <span className="contact-socials-heading">SOCIAL PROFILES &amp; ACCOUNTS</span>
               <div className="contact-social-pills-grid">
-                <a
-                  href={CONTACT.facebook}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="contact-social-pill"
-                  aria-label="Facebook Profile"
-                >
-                  <FaFacebookF className="social-pill-icon" />
+                <a href={CONTACT.facebook} target="_blank" rel="noreferrer" className="contact-social-pill" aria-label="Facebook Profile">
+                  <FaFacebookF className="social-pill-icon" aria-hidden="true" />
                   <span>Facebook</span>
                 </a>
-
-                <a
-                  href={CONTACT.instagram}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="contact-social-pill"
-                  aria-label="Instagram Profile"
-                >
-                  <FaInstagram className="social-pill-icon" />
+                <a href={CONTACT.instagram} target="_blank" rel="noreferrer" className="contact-social-pill" aria-label="Instagram Profile">
+                  <FaInstagram className="social-pill-icon" aria-hidden="true" />
                   <span>Instagram</span>
                 </a>
-
-                <a
-                  href={CONTACT.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="contact-social-pill"
-                  aria-label="GitHub Profile"
-                >
-                  <FaGithub className="social-pill-icon" />
+                <a href={CONTACT.github} target="_blank" rel="noreferrer" className="contact-social-pill" aria-label="GitHub Profile">
+                  <FaGithub className="social-pill-icon" aria-hidden="true" />
                   <span>GitHub</span>
                 </a>
-
-                <a
-                  href={CONTACT.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="contact-social-pill"
-                  aria-label="LinkedIn Profile"
-                >
-                  <FaLinkedinIn className="social-pill-icon" />
+                <a href={CONTACT.linkedin} target="_blank" rel="noreferrer" className="contact-social-pill" aria-label="LinkedIn Profile">
+                  <FaLinkedinIn className="social-pill-icon" aria-hidden="true" />
                   <span>LinkedIn</span>
                 </a>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

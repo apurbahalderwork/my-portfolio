@@ -1,54 +1,84 @@
+/* Hallmark · macrostructure: Marquee Hero · tone: technical-atmospheric · anchor hue: orange-30°
+   genre: atmospheric · theme: custom (orange obsidian) · studied: no
+   Hallmark audit pass 2026-09-13 — all 16 findings fixed.
+   ========================================================================== */
 /* ==========================================================================
    Apurba® Portfolio - Framer/Dribbble Showcase 3D Design System
    ========================================================================== */
 
 :root {
-  /* Signature Color Palette */
-  --primary-orange: #eb5933;
-  --primary-orange-hover: #ff6a42;
-  --primary-orange-deep: #d8451f;
-  --primary-orange-tint: #fff4f0;
-  --primary-orange-glow: rgba(235, 89, 51, 0.28);
+  /* ── OKLCH Colour Tokens (canonical) ──────────────────────────── */
+  --color-accent:          oklch(60% 0.19 38);     /* #eb5933 orange */
+  --color-accent-hover:    oklch(65% 0.19 38);     /* #ff6a42 */
+  --color-accent-deep:     oklch(55% 0.19 38);     /* #d8451f */
+  --color-accent-tint:     oklch(97% 0.03 65);     /* warm near-white */
+  --color-accent-glow:     oklch(60% 0.19 38 / 0.28);
 
-  --obsidian-dark: #0d0d10;
-  --obsidian-card: #151519;
-  --obsidian-card-hover: #1c1c22;
-  --obsidian-border: rgba(255, 255, 255, 0.1);
+  --color-paper:           oklch(99% 0.006 65);    /* warm off-white (was pure #fff) */
+  --color-paper-2:         oklch(97% 0.007 65);    /* --off-white */
+  --color-paper-dark:      oklch(9%  0.004 275);   /* #0d0d10 obsidian */
+  --color-paper-dark-2:    oklch(12% 0.004 275);   /* #151519 */
+  --color-paper-dark-3:    oklch(16% 0.004 275);   /* #1c1c22 */
+  --color-border-dark:     oklch(100% 0 0 / 0.10);
+  --color-border-light:    oklch(0%   0 0 / 0.08);
 
-  --white: #ffffff;
-  --off-white: #f8f8fb;
-  --border-light: rgba(0, 0, 0, 0.08);
+  --color-ink:             oklch(11% 0.004 275);   /* #121214 */
+  --color-muted-dark:      oklch(43% 0.008 275);   /* #5b5b63 */
+  --color-muted-light:     oklch(68% 0.006 275);   /* #a0a0ab */
 
-  --text-dark: #121214;
-  --text-muted-dark: #5b5b63;
-  --text-light: #ffffff;
-  --text-muted-light: #a0a0ab;
+  --color-success:         oklch(61% 0.16 158);    /* #10b981 emerald */
+  --color-success-bg:      oklch(61% 0.16 158 / 0.12);
+  --color-success-border:  oklch(61% 0.16 158 / 0.30);
+  --color-error:           oklch(65% 0.18 26);     /* #f87171 red */
+  --color-error-bg:        oklch(65% 0.18 26 / 0.12);
+  --color-error-border:    oklch(65% 0.18 26 / 0.30);
+  --color-info:            oklch(73% 0.14 220);    /* #38bdf8 cyan */
+  --color-info-bg:         oklch(73% 0.14 220 / 0.12);
+  --color-info-border:     oklch(73% 0.14 220 / 0.30);
 
-  /* Typography Stacks */
+  --color-focus:           oklch(60% 0.19 38);     /* focus ring = accent */
+
+  /* ── Legacy hex aliases (kept for backward compat) ────────────── */
+  --primary-orange:        var(--color-accent);
+  --primary-orange-hover:  var(--color-accent-hover);
+  --primary-orange-deep:   var(--color-accent-deep);
+  --primary-orange-tint:   var(--color-accent-tint);
+  --primary-orange-glow:   var(--color-accent-glow);
+  --obsidian-dark:         var(--color-paper-dark);
+  --obsidian-card:         var(--color-paper-dark-2);
+  --obsidian-card-hover:   var(--color-paper-dark-3);
+  --obsidian-border:       var(--color-border-dark);
+  --white:                 var(--color-paper);
+  --off-white:             var(--color-paper-2);
+  --border-light:          var(--color-border-light);
+  --text-dark:             var(--color-ink);
+  --text-muted-dark:       var(--color-muted-dark);
+  --text-light:            var(--color-paper);
+  --text-muted-light:      var(--color-muted-light);
+  --accent-cyan:           var(--color-info);
+  --accent-emerald:        var(--color-success);
+  --accent-amber:          oklch(78% 0.17 75);
+  --bg-primary:            var(--color-paper-dark);
+  --bg-secondary:          oklch(11% 0.004 275);
+  --bg-surface:            oklch(10% 0.004 275);
+  --bg-card:               oklch(13% 0.004 275);
+  --bg-card-hover:         oklch(17% 0.004 275);
+  --text-main:             oklch(96% 0.003 275);
+  --text-muted:            oklch(66% 0.006 275);
+  --text-dim:              oklch(50% 0.006 275);
+
+  /* ── Typography Stacks ────────────────────────────────────────── */
   --font-display: 'Syne', 'Outfit', system-ui, sans-serif;
   --font-heading: 'Outfit', system-ui, sans-serif;
-  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+  --font-sans:    'Plus Jakarta Sans', system-ui, sans-serif;
 
-  /* Semantic System Tokens (Developer & Documentation Craft) */
-  --bg-primary: #0d0d10;
-  --bg-secondary: #141419;
-  --bg-surface: #101015;
-  --bg-card: #171720;
-  --bg-card-hover: #1f1f2a;
-  --text-main: #f3f3f6;
-  --text-muted: #9c9ca8;
-  --text-dim: #6c6c7b;
-  --accent-cyan: #38bdf8;
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
-
-  /* 3D Shadows & Transitions */
-  --shadow-3d-card: 0 16px 36px -10px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
-  --shadow-3d-hover: 0 28px 55px -15px rgba(0, 0, 0, 0.2), 0 0 30px rgba(235, 89, 51, 0.12);
-  --shadow-dark-3d: 0 24px 48px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  --shadow-dark-hover: 0 32px 65px -15px rgba(0, 0, 0, 0.7), 0 0 35px rgba(235, 89, 51, 0.25);
+  /* ── 3D Shadows & Easings ─────────────────────────────────────── */
+  --shadow-3d-card:  0 16px 36px -10px oklch(0% 0 0 / 0.12), 0 0 0 1px oklch(0% 0 0 / 0.04);
+  --shadow-3d-hover: 0 28px 55px -15px oklch(0% 0 0 / 0.20), 0 0 30px var(--color-accent-glow);
+  --shadow-dark-3d:  0 24px 48px -12px oklch(0% 0 0 / 0.50), 0 0 0 1px oklch(100% 0 0 / 0.08);
+  --shadow-dark-hover: 0 32px 65px -15px oklch(0% 0 0 / 0.70), 0 0 35px var(--color-accent-glow);
 
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
@@ -66,16 +96,17 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
-  background-color: var(--white);
-  color: var(--text-dark);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  overflow-x: clip; /* Hallmark gate 34 — clip not hidden so sticky still works */
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--white);
-  color: var(--text-dark);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -96,6 +127,23 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* ── Global :focus-visible ring (Hallmark gate 49) ─────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ── Reduced-motion guard (Hallmark motion discipline) ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* 3D Card Hover Utility */
@@ -450,8 +498,8 @@ img {
    ========================================================================== */
 .framer-hero-container {
   position: relative;
-  background: linear-gradient(180deg, #eb5933 0%, #e24e27 100%);
-  color: var(--white);
+  background: var(--color-accent); /* flat anchor hue — no gradient (Hallmark anti-pattern fix) */
+  color: var(--color-paper);
   min-height: calc(100vh - 80px);
   overflow: hidden;
   display: flex;
@@ -623,29 +671,27 @@ img {
 .framer-art-card {
   width: 220px;
   padding: 10px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 20px 45px oklch(0% 0 0 / 0.25);
   animation: float-3d-slow 5s ease-in-out infinite alternate;
 }
 
 @keyframes float-3d-slow {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(-14px) rotate(1.5deg);
-  }
+  0%   { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-14px) rotate(1.5deg); }
 }
 
+/* Use animation-play-state on hover — avoids !important cascade conflict */
 .framer-art-card:hover {
-  transform: translateY(-6px) scale(1.03) !important;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  animation-play-state: paused;
+  box-shadow: 0 30px 60px oklch(0% 0 0 / 0.35);
+  transform: translateY(-6px) scale(1.03);
 }
 
 .art-card-media {
   width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #f0f0f0;
+  background: var(--color-paper-2);
   border-radius: 4px;
 }
 
@@ -684,36 +730,33 @@ img {
 }
 
 .art-category {
-  color: #888;
+  color: var(--color-muted-dark);
   font-weight: 500;
 }
 
 /* Bottom "Let's Talk" Card */
 .framer-talk-card {
-  background: var(--obsidian-dark);
-  color: var(--white);
+  background: var(--color-paper-dark);
+  color: var(--color-paper);
   padding: 14px 18px;
   display: flex;
   align-items: center;
   gap: 16px;
   width: 100%;
   max-width: 320px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 25px 50px oklch(0% 0 0 / 0.40);
   animation: float-3d-reverse 6s ease-in-out infinite alternate;
 }
 
 @keyframes float-3d-reverse {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(12px) rotate(-1deg);
-  }
+  0%   { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(12px) rotate(-1deg); }
 }
 
 .framer-talk-card:hover {
-  transform: translateY(-4px) scale(1.02) !important;
-  box-shadow: 0 32px 65px rgba(0, 0, 0, 0.55);
+  animation-play-state: paused;
+  box-shadow: 0 32px 65px oklch(0% 0 0 / 0.55);
+  transform: translateY(-4px) scale(1.02);
 }
 
 .talk-avatar-col .talk-avatar {
@@ -841,7 +884,7 @@ img {
 
 .marquee-icon {
   font-size: 1.4rem;
-  color: #222;
+  color: var(--color-ink);
 }
 
 @keyframes marquee-scroll {
@@ -1336,8 +1379,13 @@ img {
 }
 
 .footer-category {
-  color: #777;
+  color: var(--color-muted-dark);
   font-weight: 500;
+}
+
+/* Wrapper for desc + tech tags + action links below the image */
+.project-card-body {
+  margin-top: 0.75rem;
 }
 
 .projects-cta-center {
@@ -2208,12 +2256,12 @@ img {
 
 .contact-banner-box {
   position: relative;
-  background: #111116;
+  background: var(--color-paper-dark);
   border-radius: 12px;
   padding: 5rem 4rem;
   overflow: hidden;
-  color: var(--white);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+  color: var(--color-paper);
+  box-shadow: 0 30px 70px oklch(0% 0 0 / 0.35);
 }
 
 .contact-ambient-glow {
@@ -2222,7 +2270,7 @@ img {
   right: 0;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(235, 89, 51, 0.4) 0%, rgba(17, 17, 22, 0) 70%);
+  background: radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%);
   filter: blur(80px);
   pointer-events: none;
 }
@@ -2282,9 +2330,9 @@ img {
 .form-field-group input,
 .form-field-group textarea {
   width: 100%;
-  background: #1c1c22;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--white);
+  background: var(--color-paper-dark-3);
+  border: 1px solid oklch(100% 0 0 / 0.12);
+  color: var(--color-paper);
   padding: 12px 14px;
   border-radius: 4px;
   font-family: inherit;
@@ -2319,12 +2367,13 @@ img {
   box-shadow: 0 6px 20px rgba(235, 89, 51, 0.4);
 }
 
+/* Legacy alias — kept for any other component that might reference it */
 .contact-success-msg {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 0.85rem;
-  color: #10b981;
+  color: var(--color-success);
   margin-top: 0.5rem;
 }
 
@@ -2335,7 +2384,15 @@ img {
   font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 0.95;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Body copy below the statement heading */
+.contact-statement-body {
+  color: oklch(100% 0 0 / 0.78);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin-top: 0.75rem;
 }
 
 .statement-sub-block {
@@ -3494,6 +3551,274 @@ img {
     gap: 8px;
     text-align: center;
   }
+}
+
+/* ==========================================================================
+   Mobile S — 480 px (Hallmark gate 34 non-negotiable floor)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .framer-hero-content-wrapper {
+    grid-template-columns: 1fr;
+    padding: 0 1.25rem;
+  }
+  .framer-hero-right {
+    display: none; /* floating cards too wide for 480 — hide, show contact CTA instead */
+  }
+  .framer-hero-name {
+    font-size: clamp(2.4rem, 12vw, 3.2rem);
+  }
+  .mega-overlay-content {
+    padding: 2rem 1.5rem;
+  }
+  .mega-nav-link {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+  .framer-impact-section {
+    padding: 4rem 1.25rem;
+  }
+  .framer-services-section {
+    padding: 4rem 1.25rem;
+  }
+  .framer-projects-section {
+    padding: 4rem 1.25rem;
+  }
+  .framer-contact-section {
+    padding: 4rem 1.25rem;
+  }
+  .contact-banner-box {
+    padding: 2rem 1.25rem;
+  }
+  .hero-cta-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-cta-row .hero-btn-primary,
+  .hero-cta-row .hero-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Mobile XS — 375 px
+   ========================================================================== */
+@media (max-width: 375px) {
+  .framer-navbar-inner {
+    padding: 1rem 1rem;
+  }
+  .framer-brand {
+    font-size: 1.4rem;
+  }
+  .framer-hero-name {
+    font-size: clamp(2rem, 14vw, 2.8rem);
+  }
+  .framer-hero-tagline {
+    font-size: 0.88rem;
+  }
+  .impact-main-heading {
+    font-size: clamp(2rem, 10vw, 2.5rem);
+  }
+  .projects-main-title {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+  }
+  .statement-huge-title {
+    font-size: clamp(2.2rem, 14vw, 3.5rem);
+  }
+}
+
+/* ==========================================================================
+   Utility classes replacing JSX inline styles (Hallmark findings 2 & 10)
+   ========================================================================== */
+
+/* Hero CTA buttons */
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 8px;
+  background-color: var(--color-accent);
+  color: var(--color-paper);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  box-shadow: 0 4px 14px var(--color-accent-glow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-btn-primary:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px var(--color-accent-glow);
+}
+
+.hero-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-light);
+  background-color: oklch(0% 0 0 / 0.03);
+  color: var(--color-ink);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-btn-secondary:hover {
+  background-color: oklch(0% 0 0 / 0.07);
+  border-color: oklch(0% 0 0 / 0.18);
+  transform: translateY(-2px);
+}
+
+/* Contact status banner */
+.contact-status-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-top: 0.75rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+.contact-status-banner.status-success {
+  color: var(--color-success);
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success-border);
+}
+.contact-status-banner.status-error {
+  color: var(--color-error);
+  background: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+}
+.contact-status-banner.status-info {
+  color: var(--color-info);
+  background: var(--color-info-bg);
+  border: 1px solid var(--color-info-border);
+}
+
+/* Contact info coordinate rows */
+.contact-info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.05rem;
+  color: oklch(100% 0 0 / 0.90);
+}
+.contact-info-row-icon {
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.contact-info-link {
+  color: var(--color-paper);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.contact-info-link:hover {
+  color: var(--color-accent);
+}
+.contact-info-rows-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Copy email button */
+.copy-email-btn {
+  background: oklch(100% 0 0 / 0.08);
+  border: 1px solid oklch(100% 0 0 / 0.16);
+  border-radius: 4px;
+  color: oklch(100% 0 0 / 0.80);
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.copy-email-btn.copied {
+  color: var(--color-success);
+}
+.copy-email-btn:hover {
+  background: oklch(100% 0 0 / 0.14);
+}
+
+/* Project inline action links */
+.project-desc-text {
+  font-size: 0.92rem;
+  color: var(--color-muted-dark);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+.project-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.project-inline-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--color-border-light);
+}
+.project-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.project-link-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+.project-link-btn.btn-live {
+  color: var(--color-paper);
+  background-color: var(--color-accent);
+}
+.project-link-btn.btn-source {
+  color: var(--color-ink);
+  background-color: oklch(0% 0 0 / 0.05);
+  border: 1px solid var(--color-border-light);
+}
+
+/* Skill preview meta */
+.preview-tech-count {
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* Footer simplified: hide nav columns, let brand statement breathe */
+.footer-nav-cols-hidden {
+  display: none;
 }
 
 /* ==========================================================================

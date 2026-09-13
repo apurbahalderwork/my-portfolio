@@ -76,9 +76,7 @@ export const Skills = () => {
   return (
     <section className="framer-services-section" id="skills">
       <div className="services-header-row">
-        <div className="framer-pill-badge">
-          <span>CAPABILITIES &amp; PROFICIENCIES</span>
-        </div>
+        {/* Eyebrow badge removed — heading carries its own weight (Hallmark finding 9) */}
         <h2 className="services-main-title">
           TECHNICAL SKILLS &amp; <br />
           CORE COMPETENCIES
@@ -142,7 +140,7 @@ export const Skills = () => {
               <div className="preview-id-badge">
                 DOMAIN {SKILL_DOMAINS[activeIdx].id}
               </div>
-              <span style={{ fontSize: '0.82rem', fontFamily: 'var(--font-mono)', color: 'var(--primary-orange)', fontWeight: 700 }}>
+              <span className="preview-tech-count">
                 {SKILL_DOMAINS[activeIdx].skills.length} VERIFIED TECHNOLOGIES
               </span>
             </div>
